@@ -1,0 +1,41 @@
+group 'linebot.projectTPB'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    baseName = 'travel-planning-bot'
+    version =  '1.0-SNAPSHOT'
+}
+
+springBoot {
+    executable = true
+}
+
+configurations {
+    provided
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("com.linecorp.bot:line-bot-spring-boot:1.5.0")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    provided("org.projectlombok:lombok:1.16.12")
+}
