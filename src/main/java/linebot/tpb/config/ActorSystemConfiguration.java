@@ -1,9 +1,11 @@
 package linebot.tpb.config;
 
+import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import linebot.tpb.di.akka.SpringAkkaExtension;
+import linebot.tpb.di.annotation.HeadActorRef;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +33,12 @@ public class ActorSystemConfiguration {
     @Bean
     public Config akkaConfiguration() {
         return ConfigFactory.load();
+    }
+
+    @Bean
+    @HeadActorRef
+    public ActorRef supervisor() {
+        return system.actorOf(springExtension.props("headActor"), "head-actor");
     }
 
 }
